@@ -25,7 +25,9 @@ const inventory = [
  * @param {Item[]} items - array of items
  */
 function logNames(items) {
-  // TODO: use `forEach`
+  // TODO: use `forEach`*******
+  //this reads "for each object in the array 'items' (which is the array 'inventory' passed to the function 'logNames' as an argument and is used inside 'logName's as the variable 'items'), I want you to print the value of the key 'name' in that object"
+  items.forEach((object) => console.log(object.name));
 }
 
 /**
@@ -33,7 +35,14 @@ function logNames(items) {
  * @returns {string[]} an array of item names in all uppercase
  */
 function getUppercaseNames(items) {
-  // TODO: use `map`
+  // TODO: use `map`*********
+  // this reads "for each element (which is an object) in 'items' (which is the array 'inventory' passed to the function 'getUppercaseNames' and is represented by the parameter 'items') look at the key 'name' in each 'element' (where 'element' is the object that .map is iterating over) and storing its value in 'itemName'.  Then 'itemName' has the '.toUpperCase() method applied to it to capitalize all its letters which is then saved in 'upperCaseName'.  'upperCaseName' is returned to be saved in 'names', which is then return through function 'getUppercaseNames'."
+  const names = items.map((element) => {
+    const itemName = element.name;
+    const upperCaseName = itemName.toUpperCase();
+    return upperCaseName;
+  });
+  return names;
 }
 
 /**
@@ -43,6 +52,9 @@ function getUppercaseNames(items) {
  */
 function getItemById(items, id) {
   // TODO: use `find`
+  const itemById = items.find((element) => element.id === id);
+  const item = itemById.name;
+  return item;
 }
 
 /**
@@ -52,6 +64,12 @@ function getItemById(items, id) {
  */
 function getItemPriceByName(items, name) {
   // TODO: use a loop!
+  for (let item of items) {
+    if (item.name === name) {
+      const itemPrice = item.price;
+      return itemPrice;
+    }
+  }
 }
 
 /**
@@ -60,7 +78,12 @@ function getItemPriceByName(items, name) {
  * @returns {Item[]} array of items that belong to the given `category`
  */
 function getItemsByCategory(items, category) {
-  // TODO: use `filter`
+  // TODO: use `filter`************
+  // this reads "for each  object in the array 'items' (which is the array 'inventory' passed to the function 'getItemsByCategory' as an argument and is used inside 'getItemsByCategory' as the variable 'items'), it will be passed to the callback function and be named 'item'.  After that it will return the category(ies) in 'item' that matches the string inputted from 'category' into the variable 'filteredItems', which will then be printed out."
+  const filteredItems = items.filter((item) => {
+    return item.category === category;
+  });
+  console.log(filteredItems);
 }
 
 /**
@@ -68,7 +91,11 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
-  // TODO: use `reduce`
+  // TODO: use `reduce`************
+  const total = items.reduce((currentTotal, item) => {
+    return item.quantity + currentTotal;
+  }, 0);
+  return total;
 }
 
 /**
@@ -77,6 +104,10 @@ function countItems(items) {
  */
 function getTotalPrice(items) {
   // TODO: use `reduce`
+  const totalPrice = items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+  return totalPrice;
 }
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
